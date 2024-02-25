@@ -1,8 +1,8 @@
-const getAllusers = async (db_connection: any) => {
+const getAllCategories = async (db_connection: any) => {
   let result;
   try {
     result = await db_connection.query(
-      "SELECT id, name, username, dob, last_login FROM users"
+      "SELECT id, name, description, createdon FROM category"
     );
     result = result.rows;
   } catch (err) {
@@ -18,11 +18,11 @@ const getAllusers = async (db_connection: any) => {
   };
 };
 
-const getUserById = async (db_connection: any, id: number) => {
+const getCategoryById = async (db_connection: any, id: number) => {
   let result;
   try {
     result = await db_connection.query(
-      "SELECT id, name, username, dob, last_login from users where id = $1",
+      "SELECT id, name, description, createdon from category where id = $1",
       [id]
     );
     if (result.rows.length) {
@@ -43,12 +43,12 @@ const getUserById = async (db_connection: any, id: number) => {
   };
 };
 
-const getUserByUsername = async (db_connection: any, username: string) => {
+const getCategoryByName = async (db_connection: any, name: string) => {
   let result;
   try {
     result = await db_connection.query(
-      "SELECT id, name, username, dob, last_login from users where username = $1",
-      [username]
+      "SELECT id, name, description, createdon from category where name = $1",
+      [name]
     );
     if (result.rows.length) {
       result = result.rows[0];
@@ -68,13 +68,14 @@ const getUserByUsername = async (db_connection: any, username: string) => {
   };
 };
 
-const setUser = async (db_connection: any, data: any) => {
+const setCategory = async (db_connection: any, data: any) => {
   let result;
   try {
     result = await db_connection.query(
-      "insert into users(name, username, password, dob, last_login) values ($1, $2, $3, $4, $5) returning id",
-      [data.name, data.username, data.password, data.dob, data.last_login]
+      "insert into category(name, description, createdon) values ($1, $2, $3) returning id",
+      [data.name, data.description, data.createdon]
     );
+
     result = result.rows[0].id;
   } catch (err: any) {
     const error = err;
@@ -95,7 +96,7 @@ const setUser = async (db_connection: any, data: any) => {
   };
 };
 
-const updateUser = async (db_connection: any, id: number, data: any) => {
+const updateCategory = async (db_connection: any, id: number, data: any) => {
   let result;
   let keyValueList: any = [];
   let queryString = "";
@@ -115,7 +116,7 @@ const updateUser = async (db_connection: any, id: number, data: any) => {
   keyValueList.push(id);
   try {
     result = await db_connection.query(
-      `update users set ${queryString.slice(0, -1)} where id = $${
+      `update category set ${queryString.slice(0, -1)} where id = $${
         keyValueList.length
       }`,
       keyValueList
@@ -135,10 +136,12 @@ const updateUser = async (db_connection: any, id: number, data: any) => {
   };
 };
 
-const deleteUser = async (db_connection: any, id: number) => {
+const deleteCategory = async (db_connection: any, id: number) => {
   let result;
   try {
-    result = await db_connection.query("delete from users where id = $1", [id]);
+    result = await db_connection.query("delete from category where id = $1", [
+      id,
+    ]);
     result = result.rowCount;
   } catch (err) {
     console.error("(-) Error in querying with the db", err);
@@ -154,10 +157,10 @@ const deleteUser = async (db_connection: any, id: number) => {
 };
 
 export {
-  getAllusers,
-  getUserById,
-  getUserByUsername,
-  setUser,
-  updateUser,
-  deleteUser,
+  getAllCategories,
+  getCategoryById,
+  getCategoryByName,
+  setCategory,
+  updateCategory,
+  deleteCategory,
 };

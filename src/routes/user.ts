@@ -14,6 +14,7 @@ if (!db_connection) {
   console.error("(-) Error connecting with the DB, please try again");
 }
 
+//Middleware
 router.use((req: any, res: any, next: any) => {
   console.log("Time: ", Date.now());
   next();
