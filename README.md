@@ -42,3 +42,20 @@ bun run index.ts
 `DELETE /v1/category/id/:id` - delete an existing category based on Id --> DONE
 
 
+### Debit Route
+
+`GET /v1/debit/` - returns all debit transactions. --> DONE
+
+`GET /v1/debit/id/:id` - return specific category based on Id --> DONE
+
+`GET /v1/debit/userid/:userid` - returns all debit transactions based on user-id. --> DONE
+
+`GET /v1/debit/categoryid/:categoryid` - returns all debit transactions based on category-id. --> DONE
+
+`GET /v1/debit/date/:date` - returns all the debit transactions with the specified date. --> DONE
+
+`POST /v1/debit/` -  create a new debit transaction with the provided data --> done
+
+`PUT /v1/debit/id/:id` - update the debit transaction if present, if not return debit transaction not present. --> DONE
+
+`DELETE /v1/debit/id/:id` - delete an existing debit transaction based on Id 
