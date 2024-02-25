@@ -27,4 +27,18 @@ bun run index.ts
 - TODO - in UI we need to check if the rowCount is 0 if so then the account is already deleted. 
 
 
+### Category Route
+
+`GET /v1/category` - returns all categories --> DONE
+
+`GET /v1/category/id/:id` - return specific category based on Id --> DONE
+
+`GET /v1/category/name/:name` - return specific category based on name --> DONE
+
+`POST /v1/category/` - create a new category with the provided data --> DONE
+
+`PUT /v1/category/id/:id` - update the category if present, if not return category not present. --> DONE
+
+`DELETE /v1/category/id/:id` - delete an existing category based on Id --> DONE
+
 
